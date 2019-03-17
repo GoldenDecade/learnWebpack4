@@ -1,5 +1,6 @@
 const path = require('path')
-
+// 使用 ExtractTextPlugin ，需要在plugins选项和 rules中scss的相关选项中进行配置
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   entry: {
     app: './src/app.js'
@@ -11,7 +12,7 @@ module.exports = {
   },
   module: {
     rules: [
-      {
+      /*{
         test: /\.(sc|sa)ss$/,
         use: [
           {
@@ -24,7 +25,29 @@ module.exports = {
             loader: 'sass-loader',// 将sass编译为css
           },
         ]
+      }*/
+      {
+        test: /\.scss/,
+        use: ExtractTextPlugin.extract({
+          fallback: {
+            loader: 'style-loader'
+          },
+          use: [
+            {
+              loader: 'css-loader',
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        })
       }
     ]
-  }
+  },
+  plugins: [
+      new ExtractTextPlugin({
+        filename: '[name].min.css',
+        allChunks: false, //这里必须指定为false，否则会异步加载css
+      })
+  ]
 }
