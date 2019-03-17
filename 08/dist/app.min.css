@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: red;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+}
+
+.box-big {
+  width: 500px;
+  height: 100px;
+  background-color: yellow;
+}
