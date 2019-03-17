@@ -31,3 +31,19 @@ require(['./vendor/multi.js'], (multi)=> {
 //ES6
 import {sum} from './vendor/sum.js'
 console.log(sum(9, 10));
+
+import '@babel/polyfill'
+let arr = [1,2,3];
+console.log(arr.includes(2));
+
+
+
+function timeout(ms){
+  return new Promise((resolve, reject)=> {
+    setInterval(resolve, ms, 'done')
+  })
+}
+timeout(100).then((val)=> {
+  console.log(val);
+})
+
