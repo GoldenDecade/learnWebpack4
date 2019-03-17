@@ -26,7 +26,8 @@ module.exports = {
         //注意： 老式IE浏览器，对style标签的数量是有限制的
         use: [
           {
-            loader: 'style-loader',
+            // loader: 'style-loader',
+            loader: 'style-loader/useable',// 注意此处 useable; 它给css文件对象 增加了两个方法 cssObj.use() & cssObj.unuse(); js中引入的css文件是否插入到HTML中; 只要import了css文件，都会将css文件打包为js代码；
             options: {
               singleton: true //将css文件处理为单个 style 标签 引入
             }
