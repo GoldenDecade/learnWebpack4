@@ -47,9 +47,34 @@ module.exports = {
             publicPath: './static/',
             outputPath: './static/'
           }
+        },
+          //  img-loader 为了压缩图片
+          {
+          loader: 'img-loader',
+          options: {
+            plugins: [
+                //需要单独下载  imagemin-pngquant 插件
+                require('imagemin-pngquant')({
+                  quality: [0.3, 0.5], // 设置图片所需颜色的
+                }),
+              /*require('imagemin-gifsicle')({
+                interlaced: false
+              }),
+              require('imagemin-mozjpeg')({
+                progressive: true,
+                arithmetic: false
+              }),
+              require('imagemin-svgo')({
+                plugins: [
+                  { removeTitle: true },
+                  { convertPathData: false }
+                ]
+              })*/
+            ]
+          }
         }
         ]
-      }
+      },
     ]
   },
   plugins: [
