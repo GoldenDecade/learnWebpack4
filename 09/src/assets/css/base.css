@@ -26,3 +26,13 @@ body {
   background: url("../imgs/li.png") no-repeat;
   background-size: contain;
 }
+.box .ani4 {
+  width: 71px;
+  height: 67px;
+  background: url("../imgs/sprite.png") no-repeat -71px 0;
+}
+.box .ani5 {
+  width: 71px;
+  height: 67px;
+  background: url("../imgs/sprite.png") no-repeat -71px -67px;
+}

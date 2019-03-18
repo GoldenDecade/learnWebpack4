@@ -10,7 +10,12 @@ let extractTextPlugin = new ExtractTextPlugin({
   allChunks: false, //这里必须指定为false，否则会异步加载css
 })
 
-
+/*
+* sprites config
+* */
+let spritesConfig = {
+  spritePath: "./dist/static"
+}
 
 module.exports = {
   entry: {
@@ -33,6 +38,14 @@ module.exports = {
           use: [
             {
               loader: 'css-loader',
+            },
+              /*loader for sprites*/
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: [require('postcss-sprites')(spritesConfig)]
+              }
             }
           ]
         })
