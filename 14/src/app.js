@@ -1,3 +1,6 @@
+import './assets/css/base.css'
+import './assets/css/index.css'
+
 import sum from "./assets/vendor/sum";
 console.log("sum(1, 12) = ", sum(1, 12));
 var minus = require("./assets/vendor/minus");
@@ -6,6 +9,14 @@ require(["./assets/vendor/multi"], function(multi) {
   console.log("multi(1, 388) = ", multi(1, 388));
 });
 
+
+//解决跨域地址 多变
+// let isPro = Object.is(process.env.NODE_ENV, 'production');
+//
+// let baseUrl = isPro ? 'http://siot.app.lefile.cn/' : 'api/'
+// console.log('baseUrl : ' + baseUrl);
+// console.log(process.env.NODE_ENV);
+/*
 //跨域请求
 console.log($);
 $.ajax({
@@ -35,7 +46,9 @@ $.ajax({
   error: function(err) {
     console.log(err);
   }
-})
+})*/
+
+
 
 if(module.hot){
 //  检测是否有模块热更新
