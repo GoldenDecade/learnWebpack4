@@ -1,8 +1,8 @@
 import 'babel-polyfill'
-/*import './assets/css/common.css'
+import './assets/css/common.css'
 import './assets/css/index.css'
 
-import './assets/fonts/iconfont.css'*/
+import './assets/fonts/iconfont.css'
 
 
 import sum from "./assets/js/sum";

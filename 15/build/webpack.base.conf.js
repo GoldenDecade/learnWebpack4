@@ -5,12 +5,10 @@ const merge = require('webpack-merge')
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");// 对应prod 模式下的，style-loader
 //===================
-const htmlWebpackPlugin = require('html-webpack-plugin')
 
 
 const prodConfig = require('./webpack.prod.conf')
 const devConfig = require('./webpack.dev.conf')
-
 
 
 const generateConfig = env => {
@@ -64,29 +62,48 @@ const generateConfig = env => {
         },
         {
           test: /\.(jpe?g|png|gif|svg)$/,
-          use: {
-            loader: 'url-loader', // 同时需要安装file-loader  对于图片比较大的会使用file-loader 解析
-            options: {
-              limit: 20000,
-              name: '[name]-[hash:5].min.[ext]',
-              publicPath: './static/',
-              outputPath: './static/',
+          use: [
+            {
+              loader: 'url-loader', // 同时需要安装file-loader  对于图片比较大的会使用file-loader 解析
+              options: {
+                limit: 20000,
+                name: '[name]-[hash:5].min.[ext]',
+                publicPath: './static/',
+                outputPath: './static/',
+              }
+            },
+            //  img-loader 为了压缩图片
+            {
+              loader: 'img-loader',
+              options: {
+                plugins: [
+                  //需要单独下载  imagemin-pngquant 插件
+                  require('imagemin-pngquant')({
+                    quality: [0.3, 0.5], // 设置图片所需颜色的
+                  }),
+                  /*require('imagemin-gifsicle')({
+                    interlaced: false
+                  }),
+                  require('imagemin-mozjpeg')({
+                    progressive: true,
+                    arithmetic: false
+                  }),
+                  require('imagemin-svgo')({
+                    plugins: [
+                      { removeTitle: true },
+                      { convertPathData: false }
+                    ]
+                  })*/
+                ]
+              }
             }
-          }
+          ]
         }
 
       ]
     },
     plugins: [
-      new htmlWebpackPlugin({
-        filename: './index.html', // filename配置的html文件目录是相对于webpackConfig.output.path路径而言的，不是相对于当前项目目录结构的。
-        // template: path.resolve(__dirname, "..", "index.html"), //以根目录中的index.html作为模板; 路径是相对于根目录的
-        template: './index.html', //以根目录中的index.html作为模板; 路径是相对于根目录的； 这里必须写为'./index.html';
-        chunks: ['app'],
-        minify: {
-          collapseWhitespace: true
-        }
-      }),
+
       new webpack.ProvidePlugin({
         $: 'jquery'
       }),
