@@ -7,6 +7,13 @@
 // console.log($('#app'));
 // console.log(jQuery);
 // $('#app').addClass('new');
+
+
+import jQuery from 'jQuery'//此时 alias 配置 jQuery$
+
+
+
+
 jQuery('div').addClass('old')
 console.log(jQuery);
 console.log(jQuery('#box'));
