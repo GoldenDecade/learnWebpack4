@@ -1,0 +1,9 @@
+body {
+  background-color: #93ffe9;
+}
+p {
+  height: 20px;
+}
+.inner {
+  background-color: green;
+}
