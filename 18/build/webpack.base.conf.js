@@ -14,9 +14,11 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 /*！！！ 这里相对src目录用的是./ 说明是同级 */
 const files = glob.sync('./src/views/*/index.js')
 // console.log(files);
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 let newEntries = {
     // vendor: ['vue', 'vue-router', 'jquery'],
 };
+// const UglifyEsPlugin = require('uglify-es-webpack-plugin')
 files.forEach((filepath) => {
     let name = /.*\/src\/(views\/(\w+)\/index)/.exec(filepath)[1]
     let htmlname = /.*\/src\/(views\/(\w+)\/index)/.exec(filepath)[2]
@@ -35,7 +37,7 @@ files.forEach((filepath) => {
 
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: newEntries,
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -51,7 +53,15 @@ module.exports = {
                 use: [
                     {
                         loader: 'babel-loader',
-
+                        /*query: {
+                            presets: [
+                                [
+                                    'env', {
+                                modules: false,// 关闭Babel的模块转换功能，保留原本的ES6模块化语法，这样Tree Shaking就能起作用
+                                }
+                                ]
+                            ]
+                        }*/
                     },
 
                     // 'eslint-loader'
@@ -88,21 +98,31 @@ module.exports = {
             $:'jquery', //下载Jquery
         }),
         new WebpackMd5Hash(),
-    new ParallelUglifyPlugin({
-        workerCount: os.cpus().length - 1,//开启几个子进程去并发的执行压缩。默认是当前运行电脑的 CPU 核数减去1
-        uglifyJS: {
-            output: {
-                beautify: false, //不需要格式化
-                comments: true, //不保留注释
-            },
-            warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
 
-            compress: {
-                drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
-                collapse_vars: true, // 内嵌定义了但是只用到一次的变量
-                reduce_vars: true, // 提取出出现多次但是没有定义成变量去引用的静态值
+        /*new UglifyJSPlugin({
+            uglifyOptions: {
+                compress: {
+                    warnings: false,
+                    drop_debugger: false,
+                    drop_console: true
+                }
             }
-        }
-    })
+        }),*/
+        new ParallelUglifyPlugin({
+            workerCount: os.cpus().length - 1,//开启几个子进程去并发的执行压缩。默认是当前运行电脑的 CPU 核数减去1
+            uglifyES: {
+                output: {
+                    beautify: false, //不需要格式化
+                    comments: true, //不保留注释
+                },
+                warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
+
+                compress: {
+                    drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
+                    collapse_vars: true, // 内嵌定义了但是只用到一次的变量
+                    reduce_vars: true, // 提取出出现多次但是没有定义成变量去引用的静态值
+                }
+            }
+        })
     ]
 }
