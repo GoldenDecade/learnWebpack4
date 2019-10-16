@@ -8,7 +8,7 @@ let HtmlPlugins = [];
 console.log(htmls);
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
-
+const WebpackMd5Hash = require('webpack-md5-hash');
 /*！！！ 这里相对src目录用的是./ 说明是同级 */
 const files = glob.sync('./src/views/*/index.js')
 // console.log(files);
@@ -36,8 +36,8 @@ module.exports = {
     entry: newEntries,
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: '[name]-[hash:5].bundle.js',
-        chunkFilename: '[name]-[hash:5].chunk.js'
+        filename: '[name]-[chunkhash:5].bundle.js',
+        chunkFilename: '[name]-[chunkhash:5].chunk.js'
     },
     module: {
         rules: [
@@ -81,6 +81,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new Webpack.ProvidePlugin({
             $:'jquery', //下载Jquery
-        })
+        }),
+        new WebpackMd5Hash()
     ]
 }
