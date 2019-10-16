@@ -3,12 +3,14 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const glob = require('glob')
 
-const cleanWebpackPlugin = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 /*！！！ 这里相对src目录用的是./ 说明是同级 */
 const files = glob.sync('./src/views/*/index.js')
 console.log(files);
-let newEntries = {};
+let newEntries = {
+    vendor: ['vue', 'vue-router', './public/jquery.js']
+};
 files.forEach((filepath)=> {
     let name = /.*\/src\/(views\/\w+\/index)/.exec(filepath)[1]
     console.log(name);
@@ -37,7 +39,27 @@ module.exports ={
             },
         ]
     },
+    /*optimization: {
+        chunks: "async",
+        minSize: 30000,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+            vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                priority: -10
+            },
+            default: {
+                minChunks: 2,
+                priority: -20,
+                reuseExistingChunk: true
+            }
+        }
+    },*/
     plugins: [
-        new cleanWebpackPlugin()
+        new CleanWebpackPlugin()
     ]
 }
