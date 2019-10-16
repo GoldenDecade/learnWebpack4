@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const glob = require('glob')
 
+const cleanWebpackPlugin = require('clean-webpack-plugin')
+
 /*！！！ 这里相对src目录用的是./ 说明是同级 */
 const files = glob.sync('./src/views/*/index.js')
 console.log(files);
@@ -34,5 +36,8 @@ module.exports ={
                 ]
             },
         ]
-    }
+    },
+    plugins: [
+        new cleanWebpackPlugin()
+    ]
 }
