@@ -1,5 +1,5 @@
 const path = require('path')
-const webpack = require('webpack')
+const Webpack = require('webpack')
 const merge = require('webpack-merge')
 const glob = require('glob')
 
@@ -9,15 +9,15 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const files = glob.sync('./src/views/*/index.js')
 console.log(files);
 let newEntries = {
-    vendor: ['vue', 'vue-router', './public/jquery.js']
+    // vendor: ['vue', 'vue-router', 'jquery'],
 };
-files.forEach((filepath)=> {
+files.forEach((filepath) => {
     let name = /.*\/src\/(views\/\w+\/index)/.exec(filepath)[1]
     console.log(name);
     newEntries[name] = filepath;
 })
 
-module.exports ={
+module.exports = {
     entry: newEntries,
     output: {
         publicPath: './',
@@ -39,27 +39,32 @@ module.exports ={
             },
         ]
     },
-    /*optimization: {
-        chunks: "async",
-        minSize: 30000,
-        minChunks: 1,
-        maxAsyncRequests: 5,
-        maxInitialRequests: 3,
-        automaticNameDelimiter: '~',
-        name: true,
-        cacheGroups: {
-            vendors: {
-                test: /[\\/]node_modules[\\/]/,
-                priority: -10
-            },
-            default: {
-                minChunks: 2,
-                priority: -20,
-                reuseExistingChunk: true
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+                commons: {// 页面之间的公用代码
+                    chunks: 'initial',
+                    name: 'common',
+                    minChunks: 2,
+                    maxInitialRequests: 5, // The default limit is too small to showcase the effect
+                    minSize: 0 // This is example is too small to create commons chunks
+                },
+                vendor: {// 基础类库
+                    chunks: 'initial',
+                    name: 'vendor',
+                    test: /node_modules/,
+                    priority: 10,
+                    enforce: true
+                },
+
             }
         }
-    },*/
+    },
     plugins: [
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new Webpack.ProvidePlugin({
+            $:'jquery', //下载Jquery
+        })
     ]
 }
