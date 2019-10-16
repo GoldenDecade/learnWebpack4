@@ -9,7 +9,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const files = glob.sync('./src/views/*/index.js')
 console.log(files);
 let newEntries = {
-    vendor: ['vue', 'vue-router', './public/jquery.js']
+    // vendor: ['vue', 'vue-router', './public/jquery.js']
 };
 files.forEach((filepath)=> {
     let name = /.*\/src\/(views\/\w+\/index)/.exec(filepath)[1]
