@@ -1,4 +1,5 @@
 const path = require('path')
+const os = require('os')
 const Webpack = require('webpack')
 const merge = require('webpack-merge')
 const glob = require('glob')
@@ -7,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 let HtmlPlugins = [];
 console.log(htmls);
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
 const WebpackMd5Hash = require('webpack-md5-hash');
 /*！！！ 这里相对src目录用的是./ 说明是同级 */
@@ -33,6 +35,7 @@ files.forEach((filepath) => {
 
 
 module.exports = {
+    mode: 'development',
     entry: newEntries,
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -43,10 +46,12 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/,
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'babel-loader'
+                        loader: 'babel-loader',
+
                     },
 
                     // 'eslint-loader'
@@ -82,6 +87,22 @@ module.exports = {
         new Webpack.ProvidePlugin({
             $:'jquery', //下载Jquery
         }),
-        new WebpackMd5Hash()
+        new WebpackMd5Hash(),
+    new ParallelUglifyPlugin({
+        workerCount: os.cpus().length - 1,//开启几个子进程去并发的执行压缩。默认是当前运行电脑的 CPU 核数减去1
+        uglifyJS: {
+            output: {
+                beautify: false, //不需要格式化
+                comments: true, //不保留注释
+            },
+            warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
+
+            compress: {
+                drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
+                collapse_vars: true, // 内嵌定义了但是只用到一次的变量
+                reduce_vars: true, // 提取出出现多次但是没有定义成变量去引用的静态值
+            }
+        }
+    })
     ]
 }
