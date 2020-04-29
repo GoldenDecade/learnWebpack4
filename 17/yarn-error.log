@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add husky -D
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add eslint-config-airbnb eslint-plugin-import -D
 
 PATH: 
   C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NetSarang\Xshell 6\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Users\Administrator\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\sbt\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Java\jdk1.8.0_131\bin;G:\software\mysql-8.0.19\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\Users\Administrator\AppData\Local\Yarn\bin;G:\software\Redis-x64-3.2.100;C:\Users\Administrator\AppData\Roaming\nvm\npm;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Administrator\AppData\Local\Yarn\bin;C:\Users\Administrator\AppData\Local\BypassRuntm;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;G:\software\nginx-1.17.9;
@@ -14,26 +14,34 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/husky: tunneling socket could not be established, cause=connect ECONNREFUSED 127.0.0.1:1080
-      at ClientRequest.onError (C:\Users\Administrator\AppData\Roaming\nvm\v10.15.3\node_modules\yarn\lib\cli.js:152234:17)
-      at Object.onceWrapper (events.js:277:13)
-      at ClientRequest.emit (events.js:189:13)
-      at Socket.socketErrorListener (_http_client.js:392:9)
-      at Socket.emit (events.js:189:13)
-      at emitErrorNT (internal/streams/destroy.js:82:8)
-      at emitErrorAndCloseNT (internal/streams/destroy.js:50:3)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Administrator\AppData\Local\Yarn\Cache\v6\npm-p-limit-2.3.0-3dd33c647a214fdfffd835933eb086da0dc21db1-integrity\node_modules\p-limit\index.js' -> 'F:\2019\webpack4\17\node_modules\@commitlint\top-level\node_modules\p-limit\index.js'
 
 npm manifest: 
   {
+    "version": "1.1.0",
     "dependencies": {
       "babel-polyfill": "^6.26.0",
       "babel-runtime": "^6.26.0",
       "jquery": "^3.3.1"
     },
     "scripts": {
+      "release": "standard-version",
+      "commit": "git -cz",
       "dev": "webpack-dev-server --env development --open --config build/webpack.base.conf.js",
       "build": "webpack --env production --config build/webpack.base.conf.js"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged",
+        "commit-msg": "commitLint -E HUSKY_GIT_PARAMS"
+      }
+    },
+    "lint-staged": {
+      "src/**/*.{js,jsx,ts,json,css,md}": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ]
     },
     "devDependencies": {
       "@babel/core": "^7.3.4",
@@ -41,9 +49,12 @@ npm manifest:
       "@babel/plugin-transform-runtime": "^7.3.4",
       "@babel/preset-env": "^7.3.4",
       "@babel/runtime": "^7.3.4",
+      "@commitlint/cli": "^8.3.5",
+      "@commitlint/config-angular": "^8.3.4",
       "babel-eslint": "^10.0.3",
       "babel-loader": "^8.0.5",
       "clean-webpack-plugin": "^2.0.1",
+      "commitizen": "^4.0.4",
       "css-loader": "1.0.0",
       "eslint": "^6.5.1",
       "eslint-loader": "^3.0.2",
@@ -51,6 +62,7 @@ npm manifest:
       "file-loader": "^3.0.1",
       "glob-all": "^3.1.0",
       "html-webpack-plugin": "^3.2.0",
+      "husky": "^4.2.5",
       "imagemin": "^6.1.0",
       "imagemin-pngquant": "^7.0.0",
       "img-loader": "^3.0.1",
@@ -58,12 +70,18 @@ npm manifest:
       "optimize-css-assets-webpack-plugin": "^5.0.1",
       "purify-css": "^1.2.5",
       "purifycss-webpack": "^0.7.0",
+      "standard-version": "^7.1.0",
       "style-loader": "^0.23.1",
       "url-loader": "^1.1.2",
       "webpack": "^4.29.6",
       "webpack-cli": "3.1.2",
       "webpack-dev-server": "^3.2.1",
       "webpack-merge": "^4.2.1"
+    },
+    "config": {
+      "commitizen": {
+        "path": "./node_modules/cz-conventional-changelog"
+      }
     }
   }
 

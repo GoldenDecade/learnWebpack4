@@ -1,4 +1,5 @@
 module.exports = {
+    'extends': ['airbnb', 'plugin:prettier/recommend'],
     // 解析ES6
     'parser': 'babel-eslint',
     'parserOptions': {
