@@ -5,6 +5,15 @@
     <title>learn optimize js</title>
 </head>
 <body>
-<div id="app">132</div>
+<script>
+    if(!window.Promise) {
+        document.write('<script src="//cdn.jsdelivr.net/npm/es6-promise@4.1.1/dist/es6-promise.min.js"><\\/script><script>ES6Promise.polyfill()<\\/script>')
+    }
+
+</script>
+<div id="app"></div>
+<% if(process.env.NODE_ENV === 'production') { %>
+<script src="//www.baidu.com"></script>
+<% } %>
 </body>
 </html>
