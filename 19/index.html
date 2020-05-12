@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>洗发宝</title>
+    <meta name="keywords" content="洗发宝,头皮屑,头油,掉头发,秃头,头痒">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+</head>
+<style>
+    * {
+        margin: 0;
+    }
+
+    body {
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    #app {
+        padding: 20px;
+    }
+
+    header {
+        font-size: 24px;
+    }
+
+    p {
+        text-indent: 2em;
+        padding: .5em;
+        text-align: left;
+    }
+
+    img {
+        width: 80vw;
+    }
+    #videoWrapper {
+        position: relative;
+        padding: 10px 0;
+        width: calc(100vw - 60px);
+        height: 400px;
+    }
+    h4 {
+        font-size: 18px;
+    }
+
+    header, h4{
+        display: inline-block;
+        font-size: 20px;
+        margin: 10px;
+        background: linear-gradient(left, #f71605, #e0f513);
+        background: -webkit-linear-gradient(left, #f71605, #e0f513);
+        background: -o-linear-gradient(right, #f71605, #e0f513);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation:scratchy 0.253s linear forwards infinite;
+        /* 其它浏览器兼容性前缀 */
+        -webkit-animation:scratchy 1s linear forwards infinite;
+        -moz-animation: scratchy 1s linear forwards infinite;
+        -ms-animation: scratchy 1s linear forwards infinite;
+        -o-animation: scratchy 1s linear forwards infinite;
+    }
+    @keyframes  scratchy {
+        0% {
+            background-position: 0 0;
+        }
+        25% {
+            background-position: 0 0;
+        }
+        26% {
+            background-position: 20px -20px;
+        }
+        50% {
+            background-position: 20px -20px;
+        }
+        51% {
+            background-position: 40px -40px;
+        }
+        75% {
+            background-position: 40px -40px;
+        }
+        76% {
+            background-position: 60px -60px;
+        }
+        99% {
+            background-position: 60px -60px;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+    /* 添加兼容性前缀 */
+    @-webkit-keyframes scratchy {
+        0% {
+            background-position: 0 0;
+        }
+        25% {
+            background-position: 0 0;
+        }
+        26% {
+            background-position: 20px -20px;
+        }
+        50% {
+            background-position: 20px -20px;
+        }
+        51% {
+            background-position: 40px -40px;
+        }
+        75% {
+            background-position: 40px -40px;
+        }
+        76% {
+            background-position: 60px -60px;
+        }
+        99% {
+            background-position: 60px -60px;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+    @-moz-keyframes scratchy {
+        0% {
+            background-position: 0 0;
+        }
+        25% {
+            background-position: 0 0;
+        }
+        26% {
+            background-position: 20px -20px;
+        }
+        50% {
+            background-position: 20px -20px;
+        }
+        51% {
+            background-position: 40px -40px;
+        }
+        75% {
+            background-position: 40px -40px;
+        }
+        76% {
+            background-position: 60px -60px;
+        }
+        99% {
+            background-position: 60px -60px;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+    @-ms-keyframes scratchy {
+        0% {
+            background-position: 0 0;
+        }
+        25% {
+            background-position: 0 0;
+        }
+        26% {
+            background-position: 20px -20px;
+        }
+        50% {
+            background-position: 20px -20px;
+        }
+        51% {
+            background-position: 40px -40px;
+        }
+        75% {
+            background-position: 40px -40px;
+        }
+        76% {
+            background-position: 60px -60px;
+        }
+        99% {
+            background-position: 60px -60px;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+    @-o-keyframes scratchy {
+        0% {
+            background-position: 0 0;
+        }
+        25% {
+            background-position: 0 0;
+        }
+        26% {
+            background-position: 20px -20px;
+        }
+        50% {
+            background-position: 20px -20px;
+        }
+        51% {
+            background-position: 40px -40px;
+        }
+        75% {
+            background-position: 40px -40px;
+        }
+        76% {
+            background-position: 60px -60px;
+        }
+        99% {
+            background-position: 60px -60px;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+</style>
+<body>
+<div id="app">
+    <header>洗发宝</header>
+    <p>
+        洗发宝顾名思义是一种原生态纯植物粉沫状的洗发产品。
+    </p>
+    <p>
+        他的成分有：皂角、无患子、茶籽、甘草、侧柏叶、苦参，桑叶，桑葚，蛇床子，地肤子，生姜，牛油果，艾草，何首乌，人参，墨旱莲，当归，熟地黄，黄连，鸡血藤，骨碎补，景天三七，薄荷，芦荟，白芷，红花，枸杞等36味中药。（皂角，无患子，山茶可以在洗头粉中起到起泡和天然表面活性剂的作用通俗点讲就是主要负责清洁）
+    </p>
+    <img src="./img/01.jpeg" alt="成分">
+    <img src="./img/02.jpg" alt="">
+    <h4>使用视频(真实拍摄)</h4>
+    <div id="videoWrapper">
+        真实视频
+    </div>
+
+
+    <p> 通过科学配伍把这三十六种植物组合在一起，古方新作
+        使用现代高科技的低温冷凝破壁磨粉技术把这些植物破壁粉粹到500-1000目的细度，（我们食用的淀粉是100目）粉质越细腻吸收情况就越好。零下195度的环境下破壁的好处是避免高温下植物的有效成分受到破坏同时有利粉粹的更细，而且通过低温后有效成分更温和，亲肤性更好。
+    </p>
+    <img src="./img/03.jpg" alt="">
+</div>
+<script src="wechatH5Video.min.js"></script>
+<script>
+    window.onload = function () {
+        var source = './1.mp4';
+        var video = new wechatH5Video(source, {
+            context: 'videoWrapper',
+            mask: true,
+            poster: './img/poster.png',
+            playBtn: true,
+            jumpBtn: true,
+            autoClose: false,
+            canvas: false,
+            isRotate: true,
+            onPlay() {
+                console.log('play');
+            },
+            onPause() {
+                console.log('pause');
+            },
+            onEnd() {
+                console.log('end');
+            }
+        });
+        video.load();
+    }
+
+
+</script>
+</body>
+</html>
