@@ -1,3 +1,4 @@
+/*
 module.exports = {
     // 解析ES6
     'parser': 'babel-eslint',
@@ -921,3 +922,4 @@ module.exports = {
         'yoda': 2,
     }
 };
+*/
