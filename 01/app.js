@@ -1,6 +1,6 @@
 // import sum from './vendor/sum'
 
-// console.log(sum(1, 2));
+// console.log(sum(1, 12));
 
 //CommonJS node
 let minus = require('./vendor/minus')
